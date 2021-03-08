@@ -9,11 +9,14 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rigid;
     public float jumpspeed;
     public bool canjump;
+    private Animator anim;
+
 
     void Start()
     {
         trans = GetComponent<Transform>();
         rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponentInChildren<Animator>();
     }
 
 
@@ -31,5 +34,18 @@ public class PlayerMovement : MonoBehaviour
         }
         if (!Mathf.Approximately(0, move))
             trans.rotation = move < 0 ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
+        //if (move != 0)
+        //{
+            //anim.SetBool("IsRun", true);
+        //}
+        //else
+            //anim.SetBool("IsRun", false);
+        if (move < 0.2 || move > -0.2)
+        {
+            anim.SetBool("IsRun", true);
+        }
+        else
+            anim.SetBool("IsRun", false);
     }
+
 }
